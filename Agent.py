@@ -1,8 +1,5 @@
-import gym
 import numpy as np
 import torch
-
-from SimpleDQN import SimpleDQN
 
 
 class Agent:
@@ -16,6 +13,8 @@ class Agent:
         self.reset_steps = 0
         self.device = device
         self.solved = False
+        self.episodes_list = []
+        self.episodes_count = 0
 
     def reset(self):
         self.obs = self.env.reset()
@@ -32,8 +31,14 @@ class Agent:
 
         if is_done:
             self.obs = self.env.reset()
-            if self.steps - self.reset_steps == 200:
+            self.episodes_list.append(self.steps - self.reset_steps)
+            self.episodes_count += 1
+            if len(self.episodes_list) > 100:
+                del self.episodes_list[0]
+                print(f'Mean steps for last 100 episodes: {np.mean(self.episodes_list)} episodes:{self.episodes_count}')
+            if np.mean(self.episodes_list) >= 195:
                 self.solved = True
+                print(f'Solved in {self.episodes_count} episodes and {self.steps} steps')
             self.reset_steps = self.steps
 
     @torch.no_grad()

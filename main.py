@@ -25,7 +25,7 @@ if __name__ == '__main__':
     optimizer = optim.Adam(params=net.parameters(), lr=LEARNING_RATE)
     criterion = torch.nn.MSELoss()
 
-    for i in range(100000):
+    for i in range(1000000):
         agent.step(net)
         env.render()
 
@@ -51,6 +51,4 @@ if __name__ == '__main__':
             optimizer.zero_grad()
 
         if agent.solved:
-            print(f'Solved in {i+1} steps.')
             break
-
