@@ -6,7 +6,7 @@ The environment counted solved if the best 100-episode average reward was 195.27
 
 Information about the environment can be found here https://gym.openai.com/envs/CartPole-v0/
 
-To make decisions I use a simple Feed-Forward neural network and Q-learning algorithm.
+To make decisions I used a simple Feed-Forward neural network and Q-learning algorithm.
 
 Three consecutive runnings give the following results:
 
